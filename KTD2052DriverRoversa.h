@@ -1,5 +1,5 @@
-#ifndef KTD2052DRIVER_H
-#define KTD2052DRIVER_H
+#ifndef KTD2052DRIVERROVERSA_H
+#define KTD2052DRIVERROVERSA_H
 #include <stdint.h>
 
 const uint8_t SID = 0x74;
@@ -21,4 +21,4 @@ void color_all(int, int, int);
 void color_rgbn_random(int);
 void color_all_random();
 
-#endif // KTD2052DRIVER_H
+#endif // KTD2052DRIVERROVERSA_H
