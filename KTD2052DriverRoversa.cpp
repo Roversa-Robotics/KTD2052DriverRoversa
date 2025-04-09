@@ -1,12 +1,12 @@
 #include "MicroBit.h"
-#include "MicroBitI2C.h"
+//#include "MicroBitI2C.h"
 #include "KTD2052DriverRoversa.h"
 
 #include <cmath>
 #include <stdint.h>
 
 extern MicroBit uBit;
-extern MicroBitI2C i2c;
+//extern MicroBitI2C i2c;
 
 // RGB maximum current settings
 const int rmax = 64; // 64/8 = 8mA
