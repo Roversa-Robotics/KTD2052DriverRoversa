@@ -1,6 +1,6 @@
 #include "MicroBit.h"
 #include "MicroBitI2C.h"
-#include "KTD2052Driver.h"
+#include "KTD2052DriverRoversa.h"
 
 #include <cmath>
 #include <stdint.h>
