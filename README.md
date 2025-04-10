@@ -5,7 +5,7 @@ This is a C++ version of the vendor driver from the Kinetic KTD2052 I2C LED modu
 [KT2052 Datasheet](https://www.mouser.com/datasheet/2/936/KTD2052_04b-2887351.pdf)
 
 To use the library, add:
-`#include "KTD2052DrifverRoversa.h"`
+`#include "KTD2052DriverRoversa.h"`
 to **main.cpp** to start using the I2C LED module.
 
 For example in **main.cpp**:
