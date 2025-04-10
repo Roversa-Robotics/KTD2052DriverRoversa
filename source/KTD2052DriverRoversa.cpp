@@ -1,7 +1,7 @@
 #include "MicroBit.h"
 //#include "MicroBitI2C.h"
 #include "KTD2052DriverRoversa.h"
-
+#include <mutex>
 #include <cmath>
 #include <stdint.h>
 
@@ -36,22 +36,23 @@ int red_list[256];
 int grn_list[256];
 int blu_list[256];
 
+std::once_flag RGB_flag;
 
 void populate_RGB_arrays() {
-    static bool array_calc = false; //run flag to only fill RGB array once
-    if (!array_calc) {
-        for (int i = 1; i < 24; i++) {
-            red_list[i] = round(((i / 255.0) / phi) * rmax);
-            grn_list[i] = round(((i / 255.0) / phi) * gmax);
-            blu_list[i] = round(((i / 255.0) / phi) * bmax);
-        }
-        for (int i = 24; i < 256; i++) {
-            red_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * rmax);
-            grn_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * gmax);
-            blu_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * bmax);
-        }
-        array_calc = true;
+    for (int i = 1; i < 24; i++) {
+        red_list[i] = round(((i / 255.0) / phi) * rmax);
+        grn_list[i] = round(((i / 255.0) / phi) * gmax);
+        blu_list[i] = round(((i / 255.0) / phi) * bmax);
     }
+    for (int i = 24; i < 256; i++) {
+        red_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * rmax);
+        grn_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * gmax);
+        blu_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * bmax);
+    }
+}
+
+void RGB_calc() {
+    std::call_once(RGB_flag, populate_RGB_arrays);
 }
 
 void i2c_write(uint8_t SID, uint8_t regAddr, uint8_t regData) {
@@ -84,7 +85,7 @@ void pattern_rgbn(int rgbn, int regData) {
 }
 
 void pattern_all(int regData) {
-    populate_RGB_arrays();
+    RGB_calc();    
     for (unsigned int i = 0; i < sizeof(rgb_list) / sizeof(rgb_list[0]); i++) {
         pattern_rgbn(rgb_list[i], regData);
     }
@@ -120,7 +121,7 @@ void fade_off() {
 
 // Color Setting Registers Core Functions
 void color_rgbn(int rgbn, int r, int g, int b) {
-    populate_RGB_arrays();
+    RGB_calc();
     int regAddr = 3 * rgbn;
     i2c_write(SID, regAddr, red_list[r]);
     i2c_write(SID, regAddr + 1, grn_list[g]);
