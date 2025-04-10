@@ -118,11 +118,11 @@ void pattern_all(int regData) {
 }
 
 /* 
-    Cycles is number of cycles before watchdog times out.
-    You can periodically refresh the cycles before it times out.
-    When cycles times out, the chip fades to zero and goes to low current standby mode.
-    255 disables watchdog and runs until pattern generator mode is turned off.
-    Note: always write to the watchdog register twice.
+Cycles is number of cycles before watchdog times out.
+You can periodically refresh the cycles before it times out.
+When cycles times out, the chip fades to zero and goes to low current standby mode.
+255 disables watchdog and runs until pattern generator mode is turned off.
+Note: always write to the watchdog register twice.
 */ 
 void pattern_watchdog(int cycles) {
     i2c_write(SID,0x15,cycles);
