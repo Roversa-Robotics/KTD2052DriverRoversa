@@ -36,16 +36,21 @@ int red_list[256];
 int grn_list[256];
 int blu_list[256];
 
+
 void populate_RGB_arrays() {
-    for (int i = 1; i < 24; i++) {
-        red_list[i] = round(((i / 255.0) / phi) * rmax);
-        grn_list[i] = round(((i / 255.0) / phi) * gmax);
-        blu_list[i] = round(((i / 255.0) / phi) * bmax);
-    }
-    for (int i = 24; i < 256; i++) {
-        red_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * rmax);
-        grn_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * gmax);
-        blu_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * bmax);
+    static bool array_calc = false; //run flag to only fill RGB array once
+    if (!array_calc) {
+        for (int i = 1; i < 24; i++) {
+            red_list[i] = round(((i / 255.0) / phi) * rmax);
+            grn_list[i] = round(((i / 255.0) / phi) * gmax);
+            blu_list[i] = round(((i / 255.0) / phi) * bmax);
+        }
+        for (int i = 24; i < 256; i++) {
+            red_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * rmax);
+            grn_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * gmax);
+            blu_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * bmax);
+        }
+        array_calc = true;
     }
 }
 
