@@ -134,11 +134,11 @@ void color_rgbn_random(int rgbn) {
     int g = rand() % 255;
     int b = rand() % 255;
     color_rgbn(rgbn, r, g, b);
-    }
+}
     
-    void color_all_random() {
+void color_all_random() {
     int r = rand() % 255;
     int g = rand() % 255;
     int b = rand() % 255;
     color_all(r, g, b);
-    }
+}
