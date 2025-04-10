@@ -68,6 +68,8 @@ void populate_RGB_arrays() {
         grn_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * gmax);
         blu_list[i] = round(pow((i / 255.0 + alpha) / (1 + alpha), gam) * bmax);
     }
+    //uBit.display.scrollAsync("KTD2052 Calcs OK"); //check if this is run once
+
 }
 
 void RGB_calc() {
