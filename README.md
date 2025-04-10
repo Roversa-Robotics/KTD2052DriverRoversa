@@ -30,7 +30,7 @@ int main()
 
 `global_off(int)` and `global_on(int)`
 
-These functions are based on the control mode configuration. See the comments in the Control Mode Configuratino comment block. Default values are EnableMode = 2 (Normal), BrightExtend = 1 (Enabled), and CoolExtend = 2 (105C). The parameter for these functions controls the fade value.
+These functions are based on the control mode configuration. See the comments in the Control Mode Configuration comment block - these values can be adjusted in **KTD2052DriverRoversa.cpp**. Default values are EnableMode = 2 (Normal), BrightExtend = 1 (Enabled), and CoolExtend = 2 (105C). The parameter for these functions controls the fade value.
 
 `global_reset()` 
 
